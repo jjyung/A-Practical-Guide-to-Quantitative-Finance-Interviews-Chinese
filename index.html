@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Practical Guide to Quantitative Finance Interviews</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <button class="menu-toggle" type="button" aria-label="開啟導覽選單" aria-expanded="false" aria-controls="site-sidebar" onclick="toggleSidebar()"><span aria-hidden="true">☰</span></button>
+    <button class="sidebar-overlay" type="button" aria-label="關閉導覽選單" onclick="toggleSidebar(false)"></button>
 
-    <nav class="sidebar">
+    <nav class="sidebar" id="site-sidebar" aria-label="主要導覽">
         <div class="sidebar-header">
             <h2><a href="index.html">A Practical Guide to Quantitative Finance Interviews</a></h2>
         </div>
@@ -33,9 +36,21 @@
     <main class="content">
         <!-- Hero Section -->
         <div class="hero">
+            <p class="hero-kicker">綠皮書繁體中文版 <span aria-hidden="true">·</span> 量化金融面試指南</p>
             <h1>A Practical Guide to Quantitative Finance Interviews</h1>
-            <p class="subtitle">A Practical Guide to Quantitative Finance Interviews</p>
+            <p class="subtitle">從機率、金融到程式設計，掌握面試核心概念</p>
             <p class="meta">作者：Xinfeng Zhou | 編輯：Brett Jiu | 第一版</p>
+            <a class="hero-cta" href="chapter1.html">從第 1 章開始閱讀 <span aria-hidden="true">→</span></a>
+            <div class="dice-art" aria-hidden="true">
+                <span class="die die-one"></span>
+                <span class="die die-five"></span>
+                <span class="die die-three"></span>
+            </div>
+            <div class="hero-stats">
+                <span><strong>200+</strong> 真實面試題</span>
+                <span><strong>7</strong> 個核心章節</span>
+                <span><strong>1</strong> 本量化面試指南</span>
+            </div>
         </div>
 
         <!-- Preface -->
@@ -149,10 +164,26 @@
     </main>
 
     <script>
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        function toggleSidebar(forceOpen) {
+            const shouldOpen = typeof forceOpen === 'boolean'
+                ? forceOpen
+                : !sidebar.classList.contains('active');
+            sidebar.classList.toggle('active', shouldOpen);
+            sidebarOverlay.classList.toggle('active', shouldOpen);
+            menuToggle.setAttribute('aria-expanded', String(shouldOpen));
+            menuToggle.setAttribute('aria-label', shouldOpen ? '關閉導覽選單' : '開啟導覽選單');
         }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') toggleSidebar(false);
+        });
+        document.querySelectorAll('.sidebar-nav a').forEach((link) => {
+            link.addEventListener('click', () => toggleSidebar(false));
+        });
     </script>
 </body>
 </html>
