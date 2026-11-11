@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,81 +17,81 @@
         </div>
         <div class="sidebar-nav">
             <ul>
-                <li><a href="index.html">首页</a></li>
-                <li class="chapter-title">章节目录</li>
-                <li><a href="chapter1.html">第1章 一般原则</a></li>
-                <li><a href="chapter2.html">第2章 智力题</a></li>
-                <li><a href="chapter3.html">第3章 微积分与线性代数</a></li>
-                <li><a href="chapter4.html">第4章 概率论</a></li>
-                <li><a href="chapter5.html">第5章 随机过程与随机微积分</a></li>
+                <li><a href="index.html">首頁</a></li>
+                <li class="chapter-title">章節目錄</li>
+                <li><a href="chapter1.html">第1章 一般原則</a></li>
+                <li><a href="chapter2.html">第2章 智力題</a></li>
+                <li><a href="chapter3.html">第3章 微積分與線性代數</a></li>
+                <li><a href="chapter4.html">第4章 機率論</a></li>
+                <li><a href="chapter5.html">第5章 隨機過程與隨機微積分</a></li>
                 <li><a href="chapter6.html">第6章 金融</a></li>
-                <li><a href="chapter7.html" class="active">第7章 算法与数值方法</a></li>
+                <li><a href="chapter7.html" class="active">第7章 演算法與數值方法</a></li>
             </ul>
         </div>
     </nav>
 
     <main class="content">
         <nav class="breadcrumb">
-            <a href="index.html">首页</a>
+            <a href="index.html">首頁</a>
             <span>›</span>
-            第7章 算法与数值方法
+            第7章 演算法與數值方法
         </nav>
         <article>
 
-<h1>第7章 算法与数值方法</h1>
+<h1>第7章 演算法與數值方法</h1>
 
-<p>虽然量化从业者花在编程上的时间百分比因工作职能（如量化分析师/研究员vs量化开发者）和公司文化而异，但典型的量化从业者通常会将部分时间用于通过编程实现模型。因此，编程技能测试通常是量化面试不可分割的一部分。</p>
+<p>雖然量化從業者花在程式設計上的時間百分比因工作職能（如量化分析師/研究員vs量化開發者）和公司文化而異，但典型的量化從業者通常會將部分時間用於通過程式設計實現模型。因此，程式設計技能測試通常是量化面試不可分割的一部分。</p>
 
-<p>在很大程度上，量化面试中的编程问题与技术面试中的类似。毫不意外，许多问题是平台或语言特定的。虽然C++和Java仍然主导市场，但我们看到越来越多的语言多样化，如Matlab、SAS、S-Plus和R。由于已有许多书籍和网站专门讨论技术面试，本章不会全面回顾编程问题。相反，它讨论一些在量化面试中最受欢迎的算法问题和数值方法。</p>
+<p>在很大程度上，量化面試中的程式設計問題與技術面試中的類似。毫不意外，許多問題是平臺或語言特定的。雖然C++和Java仍然主導市場，但我們看到越來越多的語言多樣化，如Matlab、SAS、S-Plus和R。由於已有許多書籍和網站專門討論技術面試，本章不會全面回顧程式設計問題。相反，它討論一些在量化面試中最受歡迎的演算法問題和數值方法。</p>
 
-<!-- 7.1 算法 -->
+<!-- 7.1 演算法 -->
 <section id="sec-7-1">
-<h2>7.1 算法</h2>
+<h2>7.1 演算法</h2>
 
-<p>在编程中，算法复杂度分析通常使用渐近分析（Asymptotic Analysis），忽略机器相关的常数，研究运行时间 \(T(n)\)——原始操作（如加法、乘法和比较）的数量——随输入数量 \(n \to \infty\) 的变化。</p>
+<p>在程式設計中，演算法複雜度分析通常使用漸近分析（Asymptotic Analysis），忽略機器相關的常數，研究執行時間 \(T(n)\)——原始操作（如加法、乘法和比較）的數量——隨輸入數量 \(n \to \infty\) 的變化。</p>
 
-<p>算法复杂度中三个最重要的记号是大O记号、\(\Omega\) 记号和 \(\Theta\) 记号：</p>
+<p>演算法複雜度中三個最重要的記號是大O記號、\(\Omega\) 記號和 \(\Theta\) 記號：</p>
 
 <ul>
-<li>\(O(g(n)) = \{f(n)\)：存在正常数 \(c\) 和 \(n_0\)，使得对所有 \(n \geq n_0\)，\(0 \leq f(n) \leq cg(n)\}\)。它是 \(f(n)\) 的<strong>渐近上界</strong>。</li>
-<li>\(\Omega(g(n)) = \{f(n)\)：存在正常数 \(c\) 和 \(n_0\)，使得对所有 \(n \geq n_0\)，\(0 \leq cg(n) \leq f(n)\}\)。它是 \(f(n)\) 的<strong>渐近下界</strong>。</li>
-<li>\(\Theta(g(n)) = \{f(n)\)：存在正常数 \(c_1\)、\(c_2\) 和 \(n_0\)，使得对所有 \(n \geq n_0\)，\(c_1g(n) \leq f(n) \leq c_2g(n)\}\)。它是 \(f(n)\) 的<strong>渐近紧界</strong>。</li>
+<li>\(O(g(n)) = \{f(n)\)：存在正常數 \(c\) 和 \(n_0\)，使得對所有 \(n \geq n_0\)，\(0 \leq f(n) \leq cg(n)\}\)。它是 \(f(n)\) 的<strong>漸近上界</strong>。</li>
+<li>\(\Omega(g(n)) = \{f(n)\)：存在正常數 \(c\) 和 \(n_0\)，使得對所有 \(n \geq n_0\)，\(0 \leq cg(n) \leq f(n)\}\)。它是 \(f(n)\) 的<strong>漸近下界</strong>。</li>
+<li>\(\Theta(g(n)) = \{f(n)\)：存在正常數 \(c_1\)、\(c_2\) 和 \(n_0\)，使得對所有 \(n \geq n_0\)，\(c_1g(n) \leq f(n) \leq c_2g(n)\}\)。它是 \(f(n)\) 的<strong>漸近緊界</strong>。</li>
 </ul>
 
-<p>除了记号之外，解释算法复杂度中的两个概念也很重要：</p>
-<p><strong>最坏情况运行时间</strong> \(W(n)\)：对任意 \(n\) 个输入的运行时间上界。</p>
-<p><strong>平均情况运行时间</strong> \(A(n)\)：如果 \(n\) 个输入是随机选择的，期望运行时间。</p>
+<p>除了記號之外，解釋演算法複雜度中的兩個概念也很重要：</p>
+<p><strong>最壞情況執行時間</strong> \(W(n)\)：對任意 \(n\) 個輸入的執行時間上界。</p>
+<p><strong>平均情況執行時間</strong> \(A(n)\)：如果 \(n\) 個輸入是隨機選擇的，期望執行時間。</p>
 
-<p>对于许多算法，\(W(n)\) 和 \(A(n)\) 具有相同的 \(O(g(n))\)。但正如我们将要讨论的，在某些问题中它们可能不同，其相对重要性往往取决于具体问题。</p>
+<p>對於許多演算法，\(W(n)\) 和 \(A(n)\) 具有相同的 \(O(g(n))\)。但正如我們將要討論的，在某些問題中它們可能不同，其相對重要性往往取決於具體問題。</p>
 
-<p>一个有 \(n\) 个输入的问题通常可以被分割成 \(a\) 个子问题，每个子问题有 \(n/b\) 个输入。这种范式通常称为<strong>分治法（Divide-and-Conquer）</strong>。如果将问题分割成子问题并合并解所需的原始操作为 \(f(n)\)，运行时间可以表示为递推方程 \(T(n) = aT(n/b) + f(n)\)，其中 \(a \geq 1\)，\(b > 1\)，且 \(f(n) \geq 0\)。</p>
+<p>一個有 \(n\) 個輸入的問題通常可以被分割成 \(a\) 個子問題，每個子問題有 \(n/b\) 個輸入。這種範式通常稱為<strong>分治法（Divide-and-Conquer）</strong>。如果將問題分割成子問題併合並解所需的原始操作為 \(f(n)\)，執行時間可以表示為遞推方程 \(T(n) = aT(n/b) + f(n)\)，其中 \(a \geq 1\)，\(b > 1\)，且 \(f(n) \geq 0\)。</p>
 
-<p><strong>主定理（Master Theorem）</strong>是求解递推方程 \(T(n) = aT(n/b) + f(n)\) 紧界的有力工具：</p>
+<p><strong>主定理（Master Theorem）</strong>是求解遞推方程 \(T(n) = aT(n/b) + f(n)\) 緊界的有力工具：</p>
 <ul>
-<li>如果 \(f(n) = O(n^{\log_b a - \varepsilon})\)，对某个常数 \(\varepsilon > 0\)，则 \(T(n) = \Theta(n^{\log_b a})\)。</li>
-<li>如果 \(f(n) = \Theta(n^{\log_b a}\log^k n)\)，对某个 \(k \geq 0\)，则 \(T(n) = \Theta(n^{\log_b a}\log^{k+1} n)\)。</li>
-<li>如果 \(f(n) = \Omega(n^{\log_b a + \varepsilon})\)，对某个常数 \(\varepsilon > 0\)，且 \(af(n/b) \leq cf(n)\)，对某个常数 \(c < 1\)，则 \(T(n) = \Theta(f(n))\)。</li>
+<li>如果 \(f(n) = O(n^{\log_b a - \varepsilon})\)，對某個常數 \(\varepsilon > 0\)，則 \(T(n) = \Theta(n^{\log_b a})\)。</li>
+<li>如果 \(f(n) = \Theta(n^{\log_b a}\log^k n)\)，對某個 \(k \geq 0\)，則 \(T(n) = \Theta(n^{\log_b a}\log^{k+1} n)\)。</li>
+<li>如果 \(f(n) = \Omega(n^{\log_b a + \varepsilon})\)，對某個常數 \(\varepsilon > 0\)，且 \(af(n/b) \leq cf(n)\)，對某個常數 \(c < 1\)，則 \(T(n) = \Theta(f(n))\)。</li>
 </ul>
 
-<p><strong>二分查找示例：</strong>要在有序数组中查找一个元素，算法从 \(a_{\lfloor n/2 \rfloor}\) 开始，每次将搜索元素数量减半，只需进行一次比较。所以 \(a = 1\)，\(b = 2\)，\(f(n) = 1\)。因此二分查找的复杂度为 \(\Theta(\log n)\)。</p>
+<p><strong>二分查詢示例：</strong>要在有序陣列中查詢一個元素，演算法從 \(a_{\lfloor n/2 \rfloor}\) 開始，每次將搜尋元素數量減半，只需進行一次比較。所以 \(a = 1\)，\(b = 2\)，\(f(n) = 1\)。因此二分查詢的複雜度為 \(\Theta(\log n)\)。</p>
 
 </section>
 
-<!-- 数字交换 -->
+<!-- 數字交換 -->
 <section id="number-swap">
-<h3 class="problem-title">数字交换</h3>
-<p><strong>如何在不使用额外存储空间的情况下交换两个整数 \(i\) 和 \(j\)？</strong></p>
+<h3 class="problem-title">數字交換</h3>
+<p><strong>如何在不使用額外儲存空間的情況下交換兩個整數 \(i\) 和 \(j\)？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>比较和交换是许多算法的基本操作。最常见的交换技术使用临时变量，但在这个问题中不允许使用。一个简单的数学方法是先存储 \(i\) 和 \(j\) 的和，然后提取各自的值：</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>比較和交換是許多演算法的基本操作。最常見的交換技術使用臨時變數，但在這個問題中不允許使用。一個簡單的數學方法是先儲存 \(i\) 和 \(j\) 的和，然後提取各自的值：</p>
 
 <pre><code class="language-cpp">void swap(int &amp;i, int &amp;j) {
-    i = i + j;    //存储i和j的和
-    j = i - j;    //将j变为i的值
-    i = i - j;    //将i变为j的值
+    i = i + j;    //儲存i和j的和
+    j = i - j;    //將j變為i的值
+    i = i - j;    //將i變為j的值
 }</code></pre>
 
-<p>另一种方案使用按位异或（XOR）运算，利用 \(x \oplus x = 0\) 和 \(0 \oplus x = x\) 的事实：</p>
+<p>另一種方案使用按位異或（XOR）運算，利用 \(x \oplus x = 0\) 和 \(0 \oplus x = x\) 的事實：</p>
 
 <pre><code class="language-cpp">void swap(int &amp;i, int &amp;j){
     i = i ^ j;
@@ -104,14 +104,14 @@
 <!-- 唯一元素 -->
 <section id="unique-elements">
 <h3 class="problem-title">唯一元素</h3>
-<p><strong>如果给你一个已排序的数组，你能写一些代码来提取数组中的唯一元素吗？例如，如果数组是[1, 1, 3, 3, 3, 5, 5, 5, 9, 9, 9, 9]，唯一元素应该是[1, 3, 5, 9]。</strong></p>
+<p><strong>如果給你一個已排序的陣列，你能寫一些程式碼來提取陣列中的唯一元素嗎？例如，如果陣列是[1, 1, 3, 3, 3, 5, 5, 5, 9, 9, 9, 9]，唯一元素應該是[1, 3, 5, 9]。</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>设 \(a\) 为一个有 \(n\) 个元素的已排序数组。每当我们遇到一个新元素 \(a_i\) 时，它的值与前一个元素不同（\(a_i \neq a_{i-1}\)）。利用这个性质我们可以轻松提取唯一元素：</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>設 \(a\) 為一個有 \(n\) 個元素的已排序陣列。每當我們遇到一個新元素 \(a_i\) 時，它的值與前一個元素不同（\(a_i \neq a_{i-1}\)）。利用這個性質我們可以輕鬆提取唯一元素：</p>
 
 <pre><code class="language-cpp">template &lt;class T&gt; vector&lt;T&gt; unique(T a[], int n) {
-    vector&lt;T&gt; vec; // 使用vector避免大小调整问题
-    vec.reserve(n); //预留空间避免重新分配
+    vector&lt;T&gt; vec; // 使用vector避免大小調整問題
+    vec.reserve(n); //預留空間避免重新分配
     vec.push_back(a[0]);
     for(int i=1; i&lt;n; ++i) {
         if(a[i] != a[i-1])
@@ -122,29 +122,29 @@
 </div></details>
 </section>
 
-<!-- 霍纳算法 -->
+<!-- 霍納演算法 -->
 <section id="horner-algorithm">
-<h3 class="problem-title">霍纳算法</h3>
-<p><strong>编写一个算法计算 \(y = A_0 + A_1x + A_2x^2 + A_3x^3 + \cdots + A_nx^n\)。</strong></p>
+<h3 class="problem-title">霍納演算法</h3>
+<p><strong>編寫一個演算法計算 \(y = A_0 + A_1x + A_2x^2 + A_3x^3 + \cdots + A_nx^n\)。</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>朴素方法分别计算多项式的每个分量然后相加，需要 \(O(n^2)\) 次乘法。我们可以使用<strong>霍纳算法（Horner's Algorithm）</strong>将乘法次数减少到 \(O(n)\)。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>樸素方法分別計算多項式的每個分量然後相加，需要 \(O(n^2)\) 次乘法。我們可以使用<strong>霍納演算法（Horner's Algorithm）</strong>將乘法次數減少到 \(O(n)\)。</p>
 
-<p>该算法将原始多项式表示为：</p>
+<p>該演算法將原始多項式表示為：</p>
 \[y = (((A_nx + A_{n-1})x + A_{n-2})x + \cdots + A_1)x + A_0\]
 
-<p>然后依次计算：\(B_n = A_n\)，\(B_{n-1} = B_nx + A_{n-1}\)，...，\(B_0 = B_1x + A_0\)。我们有 \(y = B_0\)，最多需要 \(n\) 次乘法。</p>
+<p>然後依次計算：\(B_n = A_n\)，\(B_{n-1} = B_nx + A_{n-1}\)，...，\(B_0 = B_1x + A_0\)。我們有 \(y = B_0\)，最多需要 \(n\) 次乘法。</p>
 </div></details>
 </section>
 
-<!-- 移动平均 -->
+<!-- 移動平均 -->
 <section id="moving-average">
-<h3 class="problem-title">移动平均</h3>
-<p><strong>给定一个长度为 \(m\) 的大数组 \(A\)，你能开发一个高效算法来构建另一个包含原始数组 \(n\) 元素移动平均的数组吗？</strong></p>
+<h3 class="problem-title">移動平均</h3>
+<p><strong>給定一個長度為 \(m\) 的大陣列 \(A\)，你能開發一個高效演算法來構建另一個包含原始陣列 \(n\) 元素移動平均的陣列嗎？</strong></p>
 <p>（\(B_1, \cdots, B_{n-1} = NA\)，\(B_i = (A_{i-n+1} + A_{i-n+2} + \cdots + A_i)/n\)，\(\forall i = n, \cdots, m\)）</p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>当我们计算下一个 \(n\) 个连续数字的移动平均时，可以重用之前计算的移动平均。只需将该平均值乘以 \(n\)，减去该移动平均中的第一个数字，然后加上新数字，就得到新的和。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>當我們計算下一個 \(n\) 個連續數字的移動平均時，可以重用之前計算的移動平均。只需將該平均值乘以 \(n\)，減去該移動平均中的第一個數字，然後加上新數字，就得到新的和。</p>
 
 <pre><code class="language-plaintext">S = A[1] + ... + A[n]; B[n] = S/n;
 for (i = n+1 to m) {
@@ -154,20 +154,20 @@ for (i = n+1 to m) {
 </div></details>
 </section>
 
-<!-- 排序算法 -->
+<!-- 排序演算法 -->
 <section id="sorting-algorithms">
-<h3 class="problem-title">排序算法</h3>
-<p><strong>你能解释三种排序算法来对 \(n\) 个不同的值 \(A_1, \cdots, A_n\) 进行排序，并分析每种算法的复杂度吗？</strong></p>
+<h3 class="problem-title">排序演算法</h3>
+<p><strong>你能解釋三種排序演算法來對 \(n\) 個不同的值 \(A_1, \cdots, A_n\) 進行排序，並分析每種演算法的複雜度嗎？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
 
 <h4>插入排序（Insertion Sort）</h4>
-<p>插入排序使用增量方法。假设我们已经排好了子数组A[1, ..., i-1]。我们将元素 \(A_i\) 插入A[1, ..., i-1]中的适当位置，得到已排序子数组A[1, ..., i]。</p>
-<p>每步的期望比较次数为 \(i/2\)，最坏情况比较次数为 \(i\)。所以：</p>
+<p>插入排序使用增量方法。假設我們已經排好了子陣列A[1, ..., i-1]。我們將元素 \(A_i\) 插入A[1, ..., i-1]中的適當位置，得到已排序子陣列A[1, ..., i]。</p>
+<p>每步的期望比較次數為 \(i/2\)，最壞情況比較次數為 \(i\)。所以：</p>
 \[A(n) = \Theta\left(\sum_{i=1}^{n}i/2\right) = \Theta(n^2), \quad W(n) = \Theta\left(\sum_{i=1}^{n}i\right) = \Theta(n^2)\]
 
-<h4>归并排序（Merge Sort）</h4>
-<p>归并排序使用分治范式。它将数组分成两个子数组，每个有 \(n/2\) 个元素，递归排序后合并。</p>
+<h4>歸併排序（Merge Sort）</h4>
+<p>歸併排序使用分治範式。它將陣列分成兩個子陣列，每個有 \(n/2\) 個元素，遞迴排序後合併。</p>
 
 <pre><code class="language-plaintext">mergesort(A, beginindex, endindex)
     if beginindex &lt; endindex
@@ -176,91 +176,91 @@ for (i = n+1 to m) {
             merge2 ← mergesort(A, centerindex + 1, endindex)
             merge(merge1, merge2)</code></pre>
 
-<p>运行时间递推函数：</p>
+<p>執行時間遞推函式：</p>
 \[T(n) = \begin{cases} 2T(n/2) + \Theta(n), & \text{if } n > 1 \\ 1, & \text{if } n = 1 \end{cases}\]
 
-<p>应用主定理，\(a = 2\)，\(b = 2\)，\(f(n) = \Theta(n)\)，所以 \(T(n) = \Theta(n\log n)\)。</p>
+<p>應用主定理，\(a = 2\)，\(b = 2\)，\(f(n) = \Theta(n)\)，所以 \(T(n) = \Theta(n\log n)\)。</p>
 
 <h4>快速排序（Quicksort）</h4>
-<p>快速排序从序列中选择一个元素 \(A_i\)，将所有其他值与之比较。小于 \(A_i\) 的放入左边子数组，大于的放入右边子数组，然后递归。</p>
+<p>快速排序從序列中選擇一個元素 \(A_i\)，將所有其他值與之比較。小於 \(A_i\) 的放入左邊子陣列，大於的放入右邊子陣列，然後遞迴。</p>
 
-<p><strong>最坏情况：</strong>当数组已排序且总选择第一个元素时，\(W(n) = \Theta(n^2)\)。</p>
+<p><strong>最壞情況：</strong>當陣列已排序且總選擇第一個元素時，\(W(n) = \Theta(n^2)\)。</p>
 
-<p><strong>平均情况：</strong>设 \(\tilde{A}_p\) 和 \(\tilde{A}_q\) 被比较的概率为 \(P(p,q) = \frac{2}{q-p+1}\)，则：</p>
+<p><strong>平均情況：</strong>設 \(\tilde{A}_p\) 和 \(\tilde{A}_q\) 被比較的機率為 \(P(p,q) = \frac{2}{q-p+1}\)，則：</p>
 \[A(n) = \sum_{q=2}^{n}\sum_{p=1}^{q-1}\frac{2}{q-p+1} = \Theta(n\log n)\]
 
-<p>虽然理论上快速排序在最坏情况下可能比归并排序慢，但它在实际中往往和归并排序一样快，甚至更快。</p>
+<p>雖然理論上快速排序在最壞情況下可能比歸併排序慢，但它在實際中往往和歸併排序一樣快，甚至更快。</p>
 </div></details>
 </section>
 
-<!-- 随机排列 -->
+<!-- 隨機排列 -->
 <section id="random-permutation">
-<h3 class="problem-title">随机排列</h3>
+<h3 class="problem-title">隨機排列</h3>
 
-<p><strong>A.</strong> 如果你有一个随机数生成器，你如何洗一副52张牌使得每种排列都等可能？</p>
+<p><strong>A.</strong> 如果你有一個隨機數生成器，你如何洗一副52張牌使得每種排列都等可能？</p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>方法一：<strong>排序随机排列</strong>。为每张牌分配一个随机数，然后按照分配的随机数顺序排列牌。复杂度为 \(\Theta(n\log n)\)。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>方法一：<strong>排序隨機排列</strong>。為每張牌分配一個隨機數，然後按照分配的隨機數順序排列牌。複雜度為 \(\Theta(n\log n)\)。</p>
 
-<p>方法二：<strong>Knuth洗牌</strong>（复杂度 \(\Theta(n)\)）：</p>
+<p>方法二：<strong>Knuth洗牌</strong>（複雜度 \(\Theta(n)\)）：</p>
 
 <pre><code class="language-plaintext">for (i = 1 to n)
     swap(A[i], A[Random(i, n)])</code></pre>
 
-<p>其中Random(i, n)是来自 \(i\) 和 \(n\) 之间离散均匀分布的随机数。</p>
+<p>其中Random(i, n)是來自 \(i\) 和 \(n\) 之間離散均勻分佈的隨機數。</p>
 
-<p>直觉：在第一步中，\(n\) 张牌中的每张都有相同概率被选为第一张牌；在第二步中，剩余 \(n-1\) 张牌中的每张都有相同概率被选为第二张牌；依此类推。每个有序序列都有 \(1/n!\) 的概率。</p>
+<p>直覺：在第一步中，\(n\) 張牌中的每張都有相同機率被選為第一張牌；在第二步中，剩餘 \(n-1\) 張牌中的每張都有相同機率被選為第二張牌；依此類推。每個有序序列都有 \(1/n!\) 的機率。</p>
 </div></details>
 
-<p><strong>B.</strong> 你有一个由字符组成的文件。文件中的字符可以顺序读取，但文件长度未知。你如何选取一个字符使得文件中每个字符被选中的概率相等？</p>
+<p><strong>B.</strong> 你有一個由字元組成的檔案。檔案中的字元可以順序讀取，但檔案長度未知。你如何選取一個字元使得檔案中每個字元被選中的機率相等？</p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>从选第一个字符开始。如果有第二个字符，以概率1/2保留第一个字符，以概率1/2用第二个字符替换。如果有第三个字符，以概率2/3保留选择，以概率1/3替换。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>從選第一個字元開始。如果有第二個字元，以機率1/2保留第一個字元，以機率1/2用第二個字元替換。如果有第三個字元，以機率2/3保留選擇，以機率1/3替換。</p>
 
-<p>一般地，设 \(C_n\) 为扫描 \(n\) 个字符后的选择，当第 \((n+1)\) 个字符存在时：</p>
+<p>一般地，設 \(C_n\) 為掃描 \(n\) 個字元後的選擇，當第 \((n+1)\) 個字元存在時：</p>
 <ul>
-<li>保留选择的概率为 \(\frac{n}{n+1}\)</li>
-<li>切换到第 \((n+1)\) 个字符的概率为 \(\frac{1}{n+1}\)</li>
+<li>保留選擇的機率為 \(\frac{n}{n+1}\)</li>
+<li>切換到第 \((n+1)\) 個字元的機率為 \(\frac{1}{n+1}\)</li>
 </ul>
-<p>使用归纳法可证明：如果有 \(m\) 个字符，每个字符被选中的概率为 \(1/m\)。</p>
+<p>使用歸納法可證明：如果有 \(m\) 個字元，每個字元被選中的機率為 \(1/m\)。</p>
 </div></details>
 </section>
 
-<!-- 搜索算法 -->
+<!-- 搜尋演算法 -->
 <section id="search-algorithms">
-<h3 class="problem-title">搜索算法</h3>
+<h3 class="problem-title">搜尋演算法</h3>
 
-<p><strong>A.</strong> 设计一个算法，使用不超过 \(3n/2\) 次比较来找到 \(n\) 个数的最小值和最大值。</p>
+<p><strong>A.</strong> 設計一個演算法，使用不超過 \(3n/2\) 次比較來找到 \(n\) 個數的最小值和最大值。</p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>将元素分成 \(n/2\) 对，比较每对中的元素，将较小的放入组 \(A\)，较大的放入组 \(B\)（需 \(n/2\) 次比较）。</p>
-<p>由于最小值必在组 \(A\) 中，最大值必在组 \(B\) 中，只需找到 \(A\) 中的最小值和 \(B\) 中的最大值，每个需要 \(n/2-1\) 次比较。总比较次数最多为 \(3n/2\)。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>將元素分成 \(n/2\) 對，比較每對中的元素，將較小的放入組 \(A\)，較大的放入組 \(B\)（需 \(n/2\) 次比較）。</p>
+<p>由於最小值必在組 \(A\) 中，最大值必在組 \(B\) 中，只需找到 \(A\) 中的最小值和 \(B\) 中的最大值，每個需要 \(n/2-1\) 次比較。總比較次數最多為 \(3n/2\)。</p>
 </div></details>
 
-<p><strong>B.</strong> 给你一个数字数组。从数组开始到某个位置，所有元素都是零；之后所有元素都是非零的。如果你不知道数组大小，如何找到第一个非零元素的位置？</p>
+<p><strong>B.</strong> 給你一個數字陣列。從陣列開始到某個位置，所有元素都是零；之後所有元素都是非零的。如果你不知道陣列大小，如何找到第一個非零元素的位置？</p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>从第1个元素开始；如果是零，检查第2个元素；如果仍是零，检查第4个元素...重复直到第 \(2^i\) 个元素是非零的。然后在 \(2^{i-1}\) 和 \(2^i\) 之间进行二分查找。</p>
-<p>如果第一个非零元素在位置 \(n\)，算法复杂度为 \(\Theta(\log n)\)。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>從第1個元素開始；如果是零，檢查第2個元素；如果仍是零，檢查第4個元素...重複直到第 \(2^i\) 個元素是非零的。然後在 \(2^{i-1}\) 和 \(2^i\) 之間進行二分查詢。</p>
+<p>如果第一個非零元素在位置 \(n\)，演算法複雜度為 \(\Theta(\log n)\)。</p>
 </div></details>
 
-<p><strong>C.</strong> 你有一个方形数字网格。每行从左到右递增，每列从上到下递增。设计算法在网格中查找一个给定数字。</p>
+<p><strong>C.</strong> 你有一個方形數字網格。每行從左到右遞增，每列從上到下遞增。設計算法在網格中查詢一個給定數字。</p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>设 \(A\) 为 \(n \times n\) 矩阵，\(x\) 为要查找的数字。从最后一列的顶部开始从上到下搜索。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>設 \(A\) 為 \(n \times n\) 矩陣，\(x\) 為要查詢的數字。從最後一列的頂部開始從上到下搜尋。</p>
 <ul>
-<li>如果 \(A_{i,n} < x < A_{i+1,n}\)，排除前 \(i\) 行，沿第 \((i+1)\) 行从右向左搜索</li>
-<li>如果 \(A_{i+1,j+1} > x > A_{i+1,j}\)，排除第 \(j+1, \cdots, n\) 列，沿第 \(j\) 列向下搜索</li>
-<li>如此交替行列搜索，直到找到 \(x\) 或确定其不存在</li>
+<li>如果 \(A_{i,n} < x < A_{i+1,n}\)，排除前 \(i\) 行，沿第 \((i+1)\) 行從右向左搜尋</li>
+<li>如果 \(A_{i+1,j+1} > x > A_{i+1,j}\)，排除第 \(j+1, \cdots, n\) 列，沿第 \(j\) 列向下搜尋</li>
+<li>如此交替行列搜尋，直到找到 \(x\) 或確定其不存在</li>
 </ul>
-<p>使用这个算法，搜索最多需要 \(2n\) 步，复杂度为 \(O(n)\)。</p>
+<p>使用這個演算法，搜尋最多需要 \(2n\) 步，複雜度為 \(O(n)\)。</p>
 </div></details>
 </section>
 
-<!-- 斐波那契数 -->
+<!-- 斐波那契數 -->
 <section id="fibonacci">
-<h3 class="problem-title">斐波那契数</h3>
-<p><strong>考虑以下计算斐波那契数的C++程序。如果对某个大的 \(n\)，计算Fibonacci(n)需要100秒，那么计算Fibonacci(n+1)需要多长时间？这个算法高效吗？你会如何计算斐波那契数？</strong></p>
+<h3 class="problem-title">斐波那契數</h3>
+<p><strong>考慮以下計算斐波那契數的C++程式。如果對某個大的 \(n\)，計算Fibonacci(n)需要100秒，那麼計算Fibonacci(n+1)需要多長時間？這個演算法高效嗎？你會如何計算斐波那契數？</strong></p>
 
 <pre><code class="language-cpp">int Fibonacci(int n)
 {
@@ -272,44 +272,44 @@ for (i = n+1 to m) {
         return Fibonacci(n-1) + Fibonacci(n-2);
 }</code></pre>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>斐波那契数定义为：\(F_0 = 0\)，\(F_1 = 1\)，\(F_n = F_{n-1} + F_{n-2}\)，\(\forall n \geq 2\)。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>斐波那契數定義為：\(F_0 = 0\)，\(F_1 = 1\)，\(F_n = F_{n-1} + F_{n-2}\)，\(\forall n \geq 2\)。</p>
 
-<p>封闭形式解：</p>
+<p>封閉形式解：</p>
 \[F_n = \frac{(1+\sqrt{5})^n - (1-\sqrt{5})^n}{2^n\sqrt{5}}\]
 
-<p>从程序可知 \(T(0) = 1\)，\(T(1) = 1\)，\(T(n) = T(n-1) + T(n-2) + 1\)。运行时间正比于斐波那契数序列。</p>
+<p>從程式可知 \(T(0) = 1\)，\(T(1) = 1\)，\(T(n) = T(n-1) + T(n-2) + 1\)。執行時間正比於斐波那契數序列。</p>
 
-<p>对于大的 \(n\)：\(\frac{T(n+1)}{T(n)} \approx \frac{\sqrt{5}+1}{2}\)。所以计算Fibonacci(n+1)的时间约为 \(\frac{\sqrt{5}+1}{2} \times 100 \approx 162\) 秒。</p>
+<p>對於大的 \(n\)：\(\frac{T(n+1)}{T(n)} \approx \frac{\sqrt{5}+1}{2}\)。所以計算Fibonacci(n+1)的時間約為 \(\frac{\sqrt{5}+1}{2} \times 100 \approx 162\) 秒。</p>
 
-<p>递归算法具有指数复杂度 \(\Theta\left(\left(\frac{\sqrt{5}+1}{2}\right)^n\right)\)，非常低效。</p>
+<p>遞迴演算法具有指數複雜度 \(\Theta\left(\left(\frac{\sqrt{5}+1}{2}\right)^n\right)\)，非常低效。</p>
 
 <h4>更高效的方法</h4>
-<p><strong>迭代法 \(\Theta(n)\)：</strong>按顺序计算 \(F_0, F_1, \cdots, F_n\)。</p>
+<p><strong>迭代法 \(\Theta(n)\)：</strong>按順序計算 \(F_0, F_1, \cdots, F_n\)。</p>
 
-<p><strong>递归平方法 \(\Theta(\log n)\)：</strong>利用矩阵关系：</p>
+<p><strong>遞迴平方法 \(\Theta(\log n)\)：</strong>利用矩陣關係：</p>
 \[\begin{bmatrix} F_{n+1} & F_n \\ F_n & F_{n-1} \end{bmatrix} = \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix}^n\]
 
-<p>设 \(A = \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix}\)，使用分治计算 \(A^n\)：</p>
+<p>設 \(A = \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix}\)，使用分治計算 \(A^n\)：</p>
 \[A^n = \begin{cases} A^{n/2} \times A^{n/2}, & \text{if } n \text{ is even} \\ A^{(n-1)/2} \times A^{(n-1)/2} \times A, & \text{if } n \text{ is odd} \end{cases}\]
 
-<p>两个 \(2 \times 2\) 矩阵的乘法复杂度为 \(\Theta(1)\)，所以 \(T(n) = T(n/2) + \Theta(1)\)，应用主定理得 \(T(n) = \Theta(\log n)\)。</p>
+<p>兩個 \(2 \times 2\) 矩陣的乘法複雜度為 \(\Theta(1)\)，所以 \(T(n) = T(n/2) + \Theta(1)\)，應用主定理得 \(T(n) = \Theta(\log n)\)。</p>
 </div></details>
 </section>
 
-<!-- 最大连续子数组 -->
+<!-- 最大連續子陣列 -->
 <section id="max-subarray">
-<h3 class="problem-title">最大连续子数组</h3>
-<p><strong>假设你有一个长度为 \(n\) 的一维数组 \(A\)，包含正数和负数。设计一个算法找到任意连续子数组 \(A[i, j]\) 的最大和：\(V(i, j) = \sum_{x=i}^{j}A[x]\)，\(1 \leq i \leq j \leq n\)。</strong></p>
+<h3 class="problem-title">最大連續子陣列</h3>
+<p><strong>假設你有一個長度為 \(n\) 的一維陣列 \(A\)，包含正數和負數。設計一個演算法找到任意連續子陣列 \(A[i, j]\) 的最大和：\(V(i, j) = \sum_{x=i}^{j}A[x]\)，\(1 \leq i \leq j \leq n\)。</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>几乎所有交易系统都需要这样一个算法来计算最大上涨（Maximum Run-up）或最大回撤（Maximum Drawdown）。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>幾乎所有交易系統都需要這樣一個演算法來計算最大上漲（Maximum Run-up）或最大回撤（Maximum Drawdown）。</p>
 
-<h4>\(O(n^2)\) 算法</h4>
-<p>从头开始依次计算 \(V(i, j)\)：\(V(i, i) = A[i]\)，\(V(i, j) = V(i, j-1) + A[j]\)（当 \(j > i\)）。</p>
+<h4>\(O(n^2)\) 演算法</h4>
+<p>從頭開始依次計算 \(V(i, j)\)：\(V(i, i) = A[i]\)，\(V(i, j) = V(i, j-1) + A[j]\)（當 \(j > i\)）。</p>
 
-<h4>\(O(n)\) 算法</h4>
-<p>定义 \(T(i) = \sum_{x=1}^{i}A[x]\) 且 \(T(0) = 0\)，则 \(V(i, j) = T(j) - T(i-1)\)。对于固定的 \(j\)，当 \(T(i-1)\) 最小化时，\(V(i, j)\) 最大化。</p>
+<h4>\(O(n)\) 演算法</h4>
+<p>定義 \(T(i) = \sum_{x=1}^{i}A[x]\) 且 \(T(0) = 0\)，則 \(V(i, j) = T(j) - T(i-1)\)。對於固定的 \(j\)，當 \(T(i-1)\) 最小化時，\(V(i, j)\) 最大化。</p>
 
 <pre><code class="language-plaintext">T = A[1]; V_max = A[1]; T_min = min(0, T)
 
@@ -320,7 +320,7 @@ For j = 2 to n
 }
 Return V_max;</code></pre>
 
-<p>C++实现：</p>
+<p>C++實現：</p>
 <pre><code class="language-cpp">double maxSubarray(double A[], int len, int &amp;i, int &amp;j)
 {
     double T=A[0], Vmax=A[0];
@@ -339,45 +339,45 @@ Return V_max;</code></pre>
 int i = 0, j = 0;
 double Vmax = maxSubarray(A, sizeof(A)/sizeof(A[0]), i, j);</code></pre>
 
-<p>结果：\(V_{max} = 9\)，\(i = 3\)，\(j = 6\)。子数组为 [4.0, -3.0, 2.0, 6.0]。</p>
+<p>結果：\(V_{max} = 9\)，\(i = 3\)，\(j = 6\)。子陣列為 [4.0, -3.0, 2.0, 6.0]。</p>
 </div></details>
 </section>
 
-<!-- 7.2 二的幂 -->
+<!-- 7.2 二的冪 -->
 <section id="sec-7-2">
-<h2>7.2 二的幂</h2>
+<h2>7.2 二的冪</h2>
 
-<p>世界上只有10种人——懂二进制的和不懂的。计算机使用二进制（base-2）数字系统运行。与十进制数字0-9不同，每个位（bit）只有两个可能的值：0和1。数字的二进制表示具有一些有趣的性质，在实践中被广泛探索。</p>
+<p>世界上只有10種人——懂二進位制的和不懂的。計算機使用二進位制（base-2）數字系統執行。與十進位制數字0-9不同，每個位（bit）只有兩個可能的值：0和1。數字的二進位制表示具有一些有趣的性質，在實踐中被廣泛探索。</p>
 </section>
 
-<!-- 2的幂 -->
+<!-- 2的冪 -->
 <section id="power-of-two">
-<h3 class="problem-title">2的幂判断</h3>
-<p><strong>如何判断一个整数是否是2的幂？</strong></p>
+<h3 class="problem-title">2的冪判斷</h3>
+<p><strong>如何判斷一個整數是否是2的冪？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>任何整数 \(x = 2^n\)（\(n \geq 0\)）只有一个位被设为1。例如，\(8 (= 2^3)\) 表示为 <code>0...01000</code>。</p>
-<p>同样，\(2^n - 1\) 的右边 \(n\) 位全部设为1。例如，7表示为 <code>0...00111</code>。</p>
-<p>所以 \(2^n\) 和 \(2^n - 1\) 没有共同的位。因此：</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>任何整數 \(x = 2^n\)（\(n \geq 0\)）只有一個位被設為1。例如，\(8 (= 2^3)\) 表示為 <code>0...01000</code>。</p>
+<p>同樣，\(2^n - 1\) 的右邊 \(n\) 位全部設為1。例如，7表示為 <code>0...00111</code>。</p>
+<p>所以 \(2^n\) 和 \(2^n - 1\) 沒有共同的位。因此：</p>
 
-<pre><code class="language-cpp">// 判断x是否为2的幂
+<pre><code class="language-cpp">// 判斷x是否為2的冪
 bool isPowerOfTwo(int x) {
     return (x &gt; 0) &amp;&amp; ((x &amp; (x - 1)) == 0);
 }</code></pre>
 
-<p>\(x \& (x-1) = 0\) 即为判断条件（其中 <code>&amp;</code> 是按位AND运算符）。</p>
+<p>\(x \& (x-1) = 0\) 即為判斷條件（其中 <code>&amp;</code> 是按位AND運算子）。</p>
 </div></details>
 </section>
 
 <!-- 乘以7 -->
 <section id="multiply-by-seven">
 <h3 class="problem-title">乘以7</h3>
-<p><strong>给出一种不使用乘法(*)运算符将整数乘以7的快速方法？</strong></p>
+<p><strong>給出一種不使用乘法(*)運算子將整數乘以7的快速方法？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
 <pre><code class="language-cpp">// (x &lt;&lt; 3) - x
-// 其中 &lt;&lt; 是位左移运算符
-// x &lt;&lt; 3 等价于 x * 8
+// 其中 &lt;&lt; 是位左移運算子
+// x &lt;&lt; 3 等價於 x * 8
 // 所以 (x &lt;&lt; 3) - x = x * 8 - x = x * 7
 int multiplyBy7(int x) {
     return (x &lt;&lt; 3) - x;
@@ -385,163 +385,163 @@ int multiplyBy7(int x) {
 </div></details>
 </section>
 
-<!-- 概率模拟 -->
+<!-- 機率模擬 -->
 <section id="probability-simulation">
-<h3 class="problem-title">概率模拟</h3>
-<p><strong>给你一枚公平硬币。你能设计一个使用公平硬币的简单游戏，使得你的获胜概率为 \(p\)，\(0 < p < 1\)？</strong></p>
+<h3 class="problem-title">機率模擬</h3>
+<p><strong>給你一枚公平硬幣。你能設計一個使用公平硬幣的簡單遊戲，使得你的獲勝機率為 \(p\)，\(0 < p < 1\)？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>关键认识到 \(p \in (0,1)\) 可以表示为二进制数，每一位都可以用公平硬币模拟。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>關鍵認識到 \(p \in (0,1)\) 可以表示為二進位制數，每一位都可以用公平硬幣模擬。</p>
 
-<p>首先，将概率 \(p\) 表示为二进制数：</p>
+<p>首先，將機率 \(p\) 表示為二進位制數：</p>
 \[p = 0.p_1p_2\cdots p_n = p_1 \cdot 2^{-1} + p_2 \cdot 2^{-2} + \cdots + p_n \cdot 2^{-n}, \quad p_i \in \{0, 1\}\]
 
-<p>然后开始抛硬币，将正面计为1，反面计为0。设 \(s_i\) 为第 \(i\) 次抛掷的结果：</p>
+<p>然後開始拋硬幣，將正面計為1，反面計為0。設 \(s_i\) 為第 \(i\) 次拋擲的結果：</p>
 
-<pre><code class="language-plaintext">算法：
-1. 将 p 表示为二进制: p = 0.p₁p₂...pₙ
-2. 从 i = 1 开始抛硬币，得到 sᵢ
-3. 比较 pᵢ 与 sᵢ：
-   - 如果 sᵢ < pᵢ（即 sᵢ=0, pᵢ=1）→ 赢，停止
-   - 如果 sᵢ > pᵢ（即 sᵢ=1, pᵢ=0）→ 输，停止
-   - 如果 sᵢ = pᵢ → 继续抛第 i+1 次
-4. 若序列有限且到最后 sₙ = pₙ → 输</code></pre>
+<pre><code class="language-plaintext">演算法：
+1. 將 p 表示為二進位制: p = 0.p₁p₂...pₙ
+2. 從 i = 1 開始拋硬幣，得到 sᵢ
+3. 比較 pᵢ 與 sᵢ：
+   - 如果 sᵢ < pᵢ（即 sᵢ=0, pᵢ=1）→ 贏，停止
+   - 如果 sᵢ > pᵢ（即 sᵢ=1, pᵢ=0）→ 輸，停止
+   - 如果 sᵢ = pᵢ → 繼續拋第 i+1 次
+4. 若序列有限且到最後 sₙ = pₙ → 輸</code></pre>
 
-<p>某些 \(p\) 值（如1/3）表示为二进制时是无限序列。随着 \(i\) 增加，达到 \(s_i \neq p_i\) 的概率趋向1。</p>
+<p>某些 \(p\) 值（如1/3）表示為二進位制時是無限序列。隨著 \(i\) 增加，達到 \(s_i \neq p_i\) 的機率趨向1。</p>
 </div></details>
 </section>
 
 <!-- 毒酒 -->
 <section id="poisoned-wine">
 <h3 class="problem-title">毒酒</h3>
-<p><strong>你有1000瓶酒准备在生日派对上使用。派对前20小时，酒庄说有一瓶被下了毒。你有10只实验鼠可以用来测试。毒性很强，任何量的毒酒都会在恰好18小时后杀死老鼠。有没有一种确定的方法在派对前用10只老鼠找到被下毒的瓶子？</strong></p>
+<p><strong>你有1000瓶酒準備在生日派對上使用。派對前20小時，酒莊說有一瓶被下了毒。你有10只實驗鼠可以用來測試。毒性很強，任何量的毒酒都會在恰好18小時後殺死老鼠。有沒有一種確定的方法在派對前用10只老鼠找到被下毒的瓶子？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>由于症状要到18小时后才显现，不能依次测试。但二分查找的思想仍然适用。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>由於症狀要到18小時後才顯現，不能依次測試。但二分查詢的思想仍然適用。</p>
 
-<p><strong>关键洞察：</strong>1到1000之间的所有整数都可以用10位二进制格式表示（\(2^{10} = 1024 > 1000\)）。</p>
+<p><strong>關鍵洞察：</strong>1到1000之間的所有整數都可以用10位二進位制格式表示（\(2^{10} = 1024 > 1000\)）。</p>
 
 <pre><code class="language-plaintext">方法：
-1. 将每瓶酒用10位二进制编号
+1. 將每瓶酒用10位二進位制編號
    例如：第1000瓶 = 1111101000
 
-2. 让老鼠k（k=1,...,10）从第k位为1的所有酒中各喝一口
-   - 老鼠1：喝所有第1位(最低位)为1的酒
-   - 老鼠2：喝所有第2位为1的酒
+2. 讓老鼠k（k=1,...,10）從第k位為1的所有酒中各喝一口
+   - 老鼠1：喝所有第1位(最低位)為1的酒
+   - 老鼠2：喝所有第2位為1的酒
    - ...
-   - 老鼠10：喝所有第10位(最高位)为1的酒
+   - 老鼠10：喝所有第10位(最高位)為1的酒
 
-3. 18小时后观察结果：
-   - 将老鼠从最高位到最低位排列
+3. 18小時後觀察結果：
+   - 將老鼠從最高位到最低位排列
    - 活鼠 → 0，死鼠 → 1
-   - 得到的二进制数即为有毒瓶子的编号</code></pre>
+   - 得到的二進位制數即為有毒瓶子的編號</code></pre>
 
-<p><strong>示例：</strong>如果第6、7、9号鼠死了而其他都活着，排列得到 <code>0101100000</code>，有毒瓶子编号为 \(2^8 + 2^6 + 2^5 = 352\)。</p>
+<p><strong>示例：</strong>如果第6、7、9號鼠死了而其他都活著，排列得到 <code>0101100000</code>，有毒瓶子編號為 \(2^8 + 2^6 + 2^5 = 352\)。</p>
 </div></details>
 </section>
 
-<!-- 7.3 数值方法 -->
+<!-- 7.3 數值方法 -->
 <section id="sec-7-3">
-<h2>7.3 数值方法</h2>
+<h2>7.3 數值方法</h2>
 
-<p>许多金融工具的价格没有封闭形式的解析解。这些金融工具的估值依赖于各种数值方法。本节讨论蒙特卡洛模拟（Monte Carlo Simulation）和有限差分方法（Finite Difference Methods）的应用。</p>
+<p>許多金融工具的價格沒有封閉形式的解析解。這些金融工具的估值依賴於各種數值方法。本節討論蒙特卡洛模擬（Monte Carlo Simulation）和有限差分方法（Finite Difference Methods）的應用。</p>
 </section>
 
-<!-- 蒙特卡洛模拟 -->
+<!-- 蒙特卡洛模擬 -->
 <section id="monte-carlo">
-<h3 class="problem-title">蒙特卡洛模拟</h3>
+<h3 class="problem-title">蒙特卡洛模擬</h3>
 
-<p>蒙特卡洛模拟是一种使用具有适当概率的随机数作为输入来迭代评估确定性模型的方法。对于衍生品定价，它模拟大量标的资产价格路径，计算每条路径衍生品的折现收益，并取平均得到衍生品价格。其有效性依赖于大数定律。</p>
+<p>蒙特卡洛模擬是一種使用具有適當機率的隨機數作為輸入來迭代評估確定性模型的方法。對於衍生品定價，它模擬大量標的資產價格路徑，計算每條路徑衍生品的折現收益，並取平均得到衍生品價格。其有效性依賴於大數定律。</p>
 
-<p><strong>A. 解释如何使用蒙特卡洛模拟对欧式看涨期权定价？</strong></p>
+<p><strong>A. 解釋如何使用蒙特卡洛模擬對歐式看漲期權定價？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>假设股票价格遵循几何布朗运动，将时间 \([t, T]\) 分成 \(N\) 个等间隔时间步，\(\Delta t = \frac{T-t}{N}\)。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>假設股票價格遵循幾何布朗運動，將時間 \([t, T]\) 分成 \(N\) 個等間隔時間步，\(\Delta t = \frac{T-t}{N}\)。</p>
 
-<p>在风险中性概率下模拟股票价格路径：</p>
+<p>在風險中性機率下模擬股票價格路徑：</p>
 \[S_i = S_{i-1} \cdot e^{(r-\sigma^2/2)\Delta t + \sigma\sqrt{\Delta t}\,\varepsilon_i}\]
-<p>其中 \(\varepsilon_i\) 是独立同分布标准正态随机变量。</p>
+<p>其中 \(\varepsilon_i\) 是獨立同分布標準正態隨機變數。</p>
 
-<p>假设模拟 \(M\) 条路径，每条路径产生到期股价 \(S_{T,k}\)，欧式看涨期权的估计价格为：</p>
+<p>假設模擬 \(M\) 條路徑，每條路徑產生到期股價 \(S_{T,k}\)，歐式看漲期權的估計價格為：</p>
 \[C = e^{-r(T-t)}\frac{\sum_{k=1}^{M}\max(S_{T,k} - K, 0)}{M}\]
 </div></details>
 
-<p><strong>B. 如果计算机只能生成[0,1]均匀分布随机变量，如何生成服从 \(N(\mu, \sigma^2)\) 的随机变量？</strong></p>
+<p><strong>B. 如果計算機只能生成[0,1]均勻分佈隨機變數，如何生成服從 \(N(\mu, \sigma^2)\) 的隨機變數？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>分两步解决：</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>分兩步解決：</p>
 <ol>
-<li>从均匀随机数生成 \(x \sim N(0,1)\) 的随机变量</li>
-<li>将 \(x\) 缩放为 \(\mu + \sigma x\) 生成 \(N(\mu, \sigma^2)\) 随机变量</li>
+<li>從均勻隨機數生成 \(x \sim N(0,1)\) 的隨機變數</li>
+<li>將 \(x\) 縮放為 \(\mu + \sigma x\) 生成 \(N(\mu, \sigma^2)\) 隨機變數</li>
 </ol>
 
-<h4>逆变换方法</h4>
-<p>对于CDF为 \(F\) 的连续随机变量 \(X\)，可通过 \(X = F^{-1}(U)\) 生成，其中 \(U \sim \text{Uniform}(0,1)\)。但标准正态的反函数无解析解。</p>
+<h4>逆變換方法</h4>
+<p>對於CDF為 \(F\) 的連續隨機變數 \(X\)，可通過 \(X = F^{-1}(U)\) 生成，其中 \(U \sim \text{Uniform}(0,1)\)。但標準正態的反函式無解析解。</p>
 
-<h4>接受-拒绝方法</h4>
-<p>使用指数分布 \(g(x) = e^{-x}\) 作为辅助分布（其逆CDF有解析解 \(x = -\log(1-u)\)）：</p>
+<h4>接受-拒絕方法</h4>
+<p>使用指數分佈 \(g(x) = e^{-x}\) 作為輔助分佈（其逆CDF有解析解 \(x = -\log(1-u)\)）：</p>
 
 \[\frac{f(x)}{g(x)} = \sqrt{\frac{2}{\pi}}e^{x-x^2/2} \leq \sqrt{\frac{2}{\pi}}e^{1/2} \approx 1.32 = M\]
 
-<pre><code class="language-plaintext">接受-拒绝算法：
-1. 抽样步骤：从 g(y) 生成随机变量 y，从 U(0,1) 生成 v
-2. 接受/拒绝步骤：
+<pre><code class="language-plaintext">接受-拒絕演算法：
+1. 抽樣步驟：從 g(y) 生成隨機變數 y，從 U(0,1) 生成 v
+2. 接受/拒絕步驟：
    如果 v ≤ f(y)/(M·g(y))，接受 x = y
-   否则，重复步骤1
-3. 最终：result = μ + σ·x</code></pre>
+   否則，重複步驟1
+3. 最終：result = μ + σ·x</code></pre>
 </div></details>
 
-<p><strong>C. 你能解释一些方差缩减技术吗？</strong></p>
+<p><strong>C. 你能解釋一些方差縮減技術嗎？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>蒙特卡洛估计量 \(\bar{Y} = \frac{1}{M}\sum_{i=1}^{M}Y_i\) 的方差为 \(Var(\bar{Y}) = \sigma/\sqrt{M}\)。以下技术可减少方差：</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>蒙特卡洛估計量 \(\bar{Y} = \frac{1}{M}\sum_{i=1}^{M}Y_i\) 的方差為 \(Var(\bar{Y}) = \sigma/\sqrt{M}\)。以下技術可減少方差：</p>
 
-<h4>1. 对偶变量（Antithetic Variable）</h4>
-<p>对每组 \(\varepsilon_i\)，同时计算 \(Y(\varepsilon_1, \cdots, \varepsilon_N)\) 和 \(Y(-\varepsilon_1, \cdots, -\varepsilon_N)\)。当两者负相关时方差减小。</p>
+<h4>1. 對偶變數（Antithetic Variable）</h4>
+<p>對每組 \(\varepsilon_i\)，同時計算 \(Y(\varepsilon_1, \cdots, \varepsilon_N)\) 和 \(Y(-\varepsilon_1, \cdots, -\varepsilon_N)\)。當兩者負相關時方差減小。</p>
 
 <h4>2. 矩匹配（Moment Matching）</h4>
-<p>重新缩放样本使样本的矩（均值和方差）匹配所需的总体矩。</p>
+<p>重新縮放樣本使樣本的矩（均值和方差）匹配所需的總體矩。</p>
 
-<h4>3. 控制变量（Control Variate）</h4>
-<p>如果有密切相关且有解析解的衍生品 \(Y\)，用相同随机序列对 \(X\) 和 \(Y\) 定价，估计 \(X\) 为 \(\hat{X} + (Y - \hat{Y})\)。</p>
+<h4>3. 控制變數（Control Variate）</h4>
+<p>如果有密切相關且有解析解的衍生品 \(Y\)，用相同隨機序列對 \(X\) 和 \(Y\) 定價，估計 \(X\) 為 \(\hat{X} + (Y - \hat{Y})\)。</p>
 
-<h4>4. 重要性抽样（Importance Sampling）</h4>
+<h4>4. 重要性抽樣（Importance Sampling）</h4>
 \[E_{f(x)}[h(x)] = \int\frac{h(x)f(x)}{g(x)}g(x)dx = E_{g(x)}\left[\frac{h(x)f(x)}{g(x)}\right]\]
-<p>如果 \(\frac{h(x)f(x)}{g(x)}\) 比 \(h(x)\) 方差更小，则更高效。适用于深度虚值期权定价。</p>
+<p>如果 \(\frac{h(x)f(x)}{g(x)}\) 比 \(h(x)\) 方差更小，則更高效。適用於深度虛值期權定價。</p>
 
-<h4>5. 低差异序列（Low-discrepancy Sequence）</h4>
-<p>使用确定性序列代替随机样本，可使收敛速率达到 \(1/M\)。</p>
+<h4>5. 低差異序列（Low-discrepancy Sequence）</h4>
+<p>使用確定性序列代替隨機樣本，可使收斂速率達到 \(1/M\)。</p>
 </div></details>
 
-<p><strong>D. 如果一个期权没有封闭形式定价公式，如何估计它的Delta和Gamma？</strong></p>
+<p><strong>D. 如果一個期權沒有封閉形式定價公式，如何估計它的Delta和Gamma？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>对三个起始价格 \(S - \delta S\)、\(S\) 和 \(S + \delta S\) 运行蒙特卡洛模拟，得到对应期权价格 \(f(S - \delta S)\)、\(f(S)\) 和 \(f(S + \delta S)\)。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>對三個起始價格 \(S - \delta S\)、\(S\) 和 \(S + \delta S\) 執行蒙特卡洛模擬，得到對應期權價格 \(f(S - \delta S)\)、\(f(S)\) 和 \(f(S + \delta S)\)。</p>
 
-<p><strong>估计的Delta：</strong></p>
+<p><strong>估計的Delta：</strong></p>
 \[\Delta = \frac{f(S + \delta S) - f(S - \delta S)}{2\delta S}\]
 
-<p><strong>估计的Gamma：</strong></p>
+<p><strong>估計的Gamma：</strong></p>
 \[\Gamma = \frac{f(S + \delta S) - 2f(S) + f(S - \delta S)}{(\delta S)^2}\]
 
-<p>为减少方差，最好使用相同的随机数序列来估计三个价格。</p>
+<p>為減少方差，最好使用相同的隨機數序列來估計三個價格。</p>
 </div></details>
 
-<p><strong>E. 如何使用蒙特卡洛模拟估计 \(\pi\)？</strong></p>
+<p><strong>E. 如何使用蒙特卡洛模擬估計 \(\pi\)？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>在单位正方形中随机选取点（\(x, y\) 为0到1间独立均匀随机变量），确定落在单位圆内的点的比例：</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>在單位正方形中隨機選取點（\(x, y\) 為0到1間獨立均勻隨機變數），確定落在單位圓內的點的比例：</p>
 
-\[\hat{p} = \frac{\text{满足 } x_i^2 + y_i^2 \leq 1 \text{ 的点数}}{\text{总点数}} = \frac{\pi/4}{1} \Rightarrow \hat{\pi} = 4\hat{p}\]
+\[\hat{p} = \frac{\text{滿足 } x_i^2 + y_i^2 \leq 1 \text{ 的點數}}{\text{總點數}} = \frac{\pi/4}{1} \Rightarrow \hat{\pi} = 4\hat{p}\]
 
-<pre><code class="language-plaintext">估计π的算法：
-1. 设 count = 0, total = M
+<pre><code class="language-plaintext">估計π的演算法：
+1. 設 count = 0, total = M
 2. For k = 1 to M:
      生成 x ~ U(0,1), y ~ U(0,1)
      If x² + y² ≤ 1 then count = count + 1
 3. π̂ = 4 × count / M</code></pre>
 
-<p>用1,000,000个点进行1,000次模拟，\(\pi\) 的平均估计为3.1416，标准差为0.0015。</p>
+<p>用1,000,000個點進行1,000次模擬，\(\pi\) 的平均估計為3.1416，標準差為0.0015。</p>
 </div></details>
 </section>
 
@@ -549,48 +549,48 @@ int multiplyBy7(int x) {
 <section id="finite-difference">
 <h3 class="problem-title">有限差分方法</h3>
 
-<p>有限差分方法通过离散化时间和标的证券价格，数值求解微分方程来估计衍生品价格。将BSM方程转化为热扩散方程后，通过建立 \(x\) 和 \(\tau\) 的网格并使用边界条件，递归计算各节点上的 \(u\) 值。</p>
+<p>有限差分方法通過離散化時間和標的證券價格，數值求解微分方程來估計衍生品價格。將BSM方程轉化為熱擴散方程後，通過建立 \(x\) 和 \(\tau\) 的網格並使用邊界條件，遞迴計算各節點上的 \(u\) 值。</p>
 
-<p><strong>A. 你能简要解释有限差分方法吗？</strong></p>
+<p><strong>A. 你能簡要解釋有限差分方法嗎？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>将 \(\tau\) 的范围 \([0, T]\) 分成 \(N\) 个离散区间（\(\Delta\tau = T/N\)），将 \(x\) 的范围 \([x_0, x_J]\) 分成 \(J\) 个离散区间（\(\Delta x = (x_J - x_0)/J\)）。</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>將 \(\tau\) 的範圍 \([0, T]\) 分成 \(N\) 個離散區間（\(\Delta\tau = T/N\)），將 \(x\) 的範圍 \([x_0, x_J]\) 分成 \(J\) 個離散區間（\(\Delta x = (x_J - x_0)/J\)）。</p>
 
-<h4>显式差分方法</h4>
-<p>使用时间 \(\tau_n\) 的前向差分和 \(x_j\) 处的二阶中心差分：</p>
+<h4>顯式差分方法</h4>
+<p>使用時間 \(\tau_n\) 的前向差分和 \(x_j\) 處的二階中心差分：</p>
 \[\frac{u_j^{n+1} - u_j^n}{\Delta\tau} = \frac{u_{j+1}^n - 2u_j^n + u_{j-1}^n}{(\Delta x)^2}\]
 
 <p>整理得：</p>
 \[u_j^{n+1} = \alpha u_{j-1}^n + (1-2\alpha)u_j^n + \alpha u_{j+1}^n, \quad \alpha = \frac{\Delta\tau}{(\Delta x)^2}\]
 
-<h4>隐式差分方法</h4>
-<p>使用时间 \(\tau_{n+1}\) 的后向差分：</p>
+<h4>隱式差分方法</h4>
+<p>使用時間 \(\tau_{n+1}\) 的後向差分：</p>
 \[\frac{u_j^{n+1} - u_j^n}{\Delta\tau} = \frac{u_{j+1}^{n+1} - 2u_j^{n+1} + u_{j-1}^{n+1}}{(\Delta x)^2}\]
 
 <h4>Crank-Nicolson方法</h4>
-<p>使用时间 \((\tau_n + \tau_{n+1})/2\) 的中心差分：</p>
+<p>使用時間 \((\tau_n + \tau_{n+1})/2\) 的中心差分：</p>
 \[\frac{u_j^{n+1} - u_j^n}{\Delta\tau} = \frac{1}{2}\left(\frac{u_{j+1}^n - 2u_j^n + u_{j-1}^n}{(\Delta x)^2} + \frac{u_{j+1}^{n+1} - 2u_j^{n+1} + u_{j-1}^{n+1}}{(\Delta x)^2}\right)\]
 </div></details>
 
-<p><strong>B. 使用显式有限差分方法时，时间维度步数过多还是空间维度步数过多更糟糕？</strong></p>
+<p><strong>B. 使用顯式有限差分方法時，時間維度步數過多還是空間維度步數過多更糟糕？</strong></p>
 
-<details class="solution"><summary>💡 点击查看解答</summary><div class="solution-content">
-<p>显式方法的稳定性条件为：</p>
+<details class="solution"><summary>💡 點選檢視解答</summary><div class="solution-content">
+<p>顯式方法的穩定性條件為：</p>
 \[1-2\alpha > 0 \Rightarrow \frac{\Delta\tau}{(\Delta x)^2} < \frac{1}{2}\]
 
-<p><strong>空间维度步数过多更糟糕。</strong></p>
+<p><strong>空間維度步數過多更糟糕。</strong></p>
 <ul>
-<li>小的 \(\Delta\tau\)（多时间步）是可取的，有利于稳定性</li>
-<li>小的 \(\Delta x\)（多空间步）可能使 \(\Delta\tau/(\Delta x)^2 > 1/2\)，导致不稳定</li>
+<li>小的 \(\Delta\tau\)（多時間步）是可取的，有利於穩定性</li>
+<li>小的 \(\Delta x\)（多空間步）可能使 \(\Delta\tau/(\Delta x)^2 > 1/2\)，導致不穩定</li>
 </ul>
-<p>相比之下，隐式差分方法始终稳定且收敛，不受此限制。</p>
+<p>相比之下，隱式差分方法始終穩定且收斂，不受此限制。</p>
 </div></details>
 </section>
 
         </article>
         <nav class="chapter-nav">
             <a href="chapter6.html" class="prev">第6章 金融</a>
-            <a href="index.html" class="next">返回首页</a>
+            <a href="index.html" class="next">返回首頁</a>
         </nav>
     </main>
 
